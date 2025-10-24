@@ -2,18 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled2/features/todoScreen/domain/calendar_state.dart';
 
-class ToDoTask extends StatefulWidget{
+class ToDoTask extends StatelessWidget{
   const ToDoTask({super.key});
 
   @override
-  State<ToDoTask> createState() => _ToDoTaskState();
-}
-
-class _ToDoTaskState extends State<ToDoTask> {
-  @override
   Widget build(BuildContext context) {
-    return  Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: 75,
@@ -30,8 +25,8 @@ class _ToDoTaskState extends State<ToDoTask> {
               ),
               Consumer<CalendarState>(
                 builder: (context, calendarState, child) {
-                  return Text('Выбранная дата: ${calendarState.selectedDay}');
-                  },
+                  return Text(' Выбранная дата: ${calendarState.selectedDay}');
+                },
               )
             ],
           ),
@@ -41,3 +36,4 @@ class _ToDoTaskState extends State<ToDoTask> {
   }
 
 }
+

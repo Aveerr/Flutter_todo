@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:untitled2/features/todoScreen/domain/calendar_state.dart';
 import 'package:untitled2/theme/app_colors.dart';
-import '../presentation/todo_text_title.dart';
-import 'todo_appbar.dart';
-import '../presentation/todo_table_calendar.dart';
-import 'package:untitled2/core/widget/task.dart';
-import 'package:provider/provider.dart';
 import 'package:untitled2/theme/app_gradients.dart';
+import '../presentation/todo_text_title.dart';
+import '../presentation/todo_table_calendar.dart';
+import 'todo_appbar.dart';
+import 'todo_task.dart';
+import 'todo_floating_action_button.dart';
+
+
 
 class TodoScreen extends StatefulWidget{
   const TodoScreen({super.key});
@@ -41,16 +44,7 @@ class _TodoScreenState extends State<TodoScreen> {
             ),
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            print('Кнопка нажата');
-          },
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(36),
-          ),
-          backgroundColor:AppColors.secondary,
-          child: Icon(Icons.add, size: 40),
-        ),
+        floatingActionButton: ToDoFloatingActionButton()
       ),
     );
   }
