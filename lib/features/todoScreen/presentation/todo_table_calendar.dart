@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:untitled2/features/todoScreen/domain/calendar_state.dart';
 class ToDoCalendar extends StatefulWidget{
   const ToDoCalendar({super.key});
 
@@ -93,17 +95,19 @@ class _ToDoCalendarState extends State<ToDoCalendar> {
         ),
         firstDay: DateTime.utc(2020, 1, 1),
         lastDay: DateTime.utc(2030, 12, 31),
+
         focusedDay: _focusedDay,
         selectedDayPredicate: (day) {
           return isSameDay(_selectedDay, day); // 👈 выделяет выбранную дату
         },
         onDaySelected: (selectedDay, focusedDay) {
           setState(() {
+            Provider.of<CalendarState>(context, listen: false).setSelectedDay(selectedDay);
             _selectedDay = selectedDay;
             _focusedDay = focusedDay; // 👈 обновляет фокус
           });
         },
-        calendarFormat: CalendarFormat.week, // 👈 н
+        calendarFormat: CalendarFormat.week,
       ),
     );
   }

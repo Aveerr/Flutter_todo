@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:untitled2/features/todoScreen/domain/calendar_state.dart';
 
 class ToDoTask extends StatefulWidget{
   const ToDoTask({super.key});
@@ -20,9 +22,18 @@ class _ToDoTaskState extends State<ToDoTask> {
           borderRadius: BorderRadius.circular(16), // 👈 радиус скругления
         ),
         child: Center(
-          child: Text(
-            'Тестовая таска!',
-            style: TextStyle(color: Colors.white, fontSize: 18),
+          child: Row(
+            children: [
+              Text(
+                'Тестовая таска!',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
+              Consumer<CalendarState>(
+                builder: (context, calendarState, child) {
+                  return Text('Выбранная дата: ${calendarState.selectedDay}');
+                  },
+              )
+            ],
           ),
         ),
       ),
