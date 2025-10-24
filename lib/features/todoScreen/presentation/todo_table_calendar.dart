@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:untitled2/features/todoScreen/domain/calendar_state.dart';
+import 'package:untitled2/theme/app_colors.dart';
 class ToDoCalendar extends StatefulWidget{
   const ToDoCalendar({super.key});
 
@@ -21,13 +22,13 @@ class _ToDoCalendarState extends State<ToDoCalendar> {
           weekdayStyle: TextStyle(
             fontFamily: 'Montserrat',
             fontSize: 13,
-            color: Color.fromRGBO(127, 125, 124, 1),
+            color: AppColors.primary,
             fontWeight: FontWeight.w200
           ), // Пн–Пт
           weekendStyle: TextStyle(
           fontFamily: 'Montserrat',
             fontSize: 13,
-            color: Color.fromRGBO(54, 221, 228, 0.7),
+            color: AppColors.secondary,
             fontWeight: FontWeight.bold
           ),   // Сб–Вс
         ),
@@ -39,7 +40,7 @@ class _ToDoCalendarState extends State<ToDoCalendar> {
                   style: TextStyle(
                       fontFamily: 'Montserrat',
                       fontSize: 15,
-                      color: Color.fromRGBO(127, 125, 124, 1)
+                      color: AppColors.primary
                   ),
                 )
             );
@@ -64,14 +65,14 @@ class _ToDoCalendarState extends State<ToDoCalendar> {
           todayTextStyle: TextStyle(
               fontFamily: 'Montserrat',
               fontSize: 25,
-              color: Color.fromRGBO(54, 221, 228, 1)
+              color: AppColors.secondary
           ),
           todayDecoration: BoxDecoration(
             color: Colors.transparent,
             shape: BoxShape.circle,
           ),
           selectedDecoration: BoxDecoration(
-            color: Colors.blue,
+            color: AppColors.secondary,
             shape: BoxShape.circle,
           ),
         ),
@@ -79,18 +80,18 @@ class _ToDoCalendarState extends State<ToDoCalendar> {
           formatButtonVisible: false,
           leftChevronIcon: Icon(
             Icons.arrow_left_rounded,
-            color: Color.fromRGBO(127, 125, 124, 1.0),
+            color: AppColors.primary,
             size: 25,
           ),
           rightChevronIcon: Icon(
             Icons.arrow_right_rounded,
-            color: Color.fromRGBO(127, 125, 124, 1.0),
+            color: AppColors.primary,
             size: 25,
           ),
           titleTextStyle: TextStyle(
               fontFamily: 'Montserrat',
               fontSize: 30,
-              color: Color.fromRGBO(127, 125, 124, 1)
+              color: AppColors.primary
           ),
         ),
         firstDay: DateTime.utc(2020, 1, 1),
