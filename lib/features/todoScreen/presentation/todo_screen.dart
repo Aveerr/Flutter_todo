@@ -47,6 +47,16 @@ class _TodoScreenState extends State<TodoScreen> {
             ),
           ),
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            print('Кнопка нажата');
+          },
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(36),
+          ),
+          backgroundColor: Color.fromRGBO(54, 221, 228, 1),
+          child: Icon(Icons.add, size: 40),
+        ),
       ),
     );
   }
