@@ -12,7 +12,7 @@ class ToDoCalendar extends StatefulWidget{
 
 class _ToDoCalendarState extends State<ToDoCalendar> {
   DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay;
+  DateTime _selectedDay = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -107,6 +107,7 @@ class _ToDoCalendarState extends State<ToDoCalendar> {
             _selectedDay = selectedDay;
             _focusedDay = focusedDay; // 👈 обновляет фокус
           });
+          print('#обработка нажатия на календарь $_selectedDay $_focusedDay');
         },
         calendarFormat: CalendarFormat.week,
       ),

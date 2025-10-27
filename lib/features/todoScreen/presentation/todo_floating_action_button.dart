@@ -1,16 +1,27 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled2/theme/app_colors.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled2/features/todoScreen/domain/task_state.dart';
 import 'package:untitled2/core/widget/task.dart';
+import 'package:untitled2/features/todoScreen/domain/calendar_state.dart';
 
-import '../domain/calendar_state.dart';
-class ToDoFloatingActionButton extends StatelessWidget {
+class ToDoFloatingActionButton extends StatefulWidget {
   const ToDoFloatingActionButton({super.key});
+
+  @override
+  State<ToDoFloatingActionButton> createState() => _ToDoFloatingActionButtonState();
+}
+
+class _ToDoFloatingActionButtonState extends State<ToDoFloatingActionButton> {
+  final TextEditingController _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: () {
+        if (kDebugMode) {
+          print('Созданна новая задача');
+        }
         /*showTimePicker(
             context: context,
             initialTime: TimeOfDay.now(),
@@ -31,7 +42,7 @@ class ToDoFloatingActionButton extends StatelessWidget {
             );
           }
         );*/
-        /*showModalBottomSheet(
+        showModalBottomSheet(
           context: context,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
@@ -40,23 +51,38 @@ class ToDoFloatingActionButton extends StatelessWidget {
           backgroundColor: AppColors.third,
 
           builder: (context) {
+            DateTime? selectedDate = Provider.of<CalendarState>(context).selectedDay;
+            print(selectedDate);
             return Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Новая задача', style: TextStyle(fontSize: 20, color: Colors.white)),
-                  TextField(
+
+                  TextField( /// ПОЛЕ ДЛЯ ВООДА НАЗВАНИЯ ТАСКИ
+                    controller: _controller,
                     decoration: InputDecoration(
                       hintText: 'Введите названи задачи',
                       hintStyle: TextStyle(color: AppColors.textPrimary),
                     ),
                     style: TextStyle(color: Colors.white),
                   ),
-                  SizedBox(height: 12),
-                  ElevatedButton(
-                    onPressed: () {
 
+                  SizedBox(height: 12),
+
+                  ElevatedButton( /// КНОПКА ДОБАВИТЬ
+                    onPressed: () {
+                      Provider
+                        .of<TaskState>(context, listen: false)
+                        .addTask(
+                        CreateTask(
+                          title: _controller.text,
+
+                        )
+                      );
+                      _controller.clear();
+                      Navigator.pop(context);
                     },
                     child: Text('Добавить'),
                   ),
@@ -64,9 +90,6 @@ class ToDoFloatingActionButton extends StatelessWidget {
               ),
             );
           },
-        );*/
-        Provider.of<TaskState>(context, listen: false).addTask(
-          ToDoTask()
         );
       },
       shape: RoundedRectangleBorder(

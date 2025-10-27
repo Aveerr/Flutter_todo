@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CalendarState extends ChangeNotifier{
-  DateTime? _selectedDay;
-  DateTime? _focusedDay;
+  late DateTime _selectedDay = DateTime.now();
+  late DateTime _focusedDay = DateTime.now();
 
-  DateTime? get selectedDay => _selectedDay;
-  DateTime? get focusedDay => _focusedDay;
+  DateTime get selectedDay => _selectedDay;
+  DateTime get focusedDay => _focusedDay;
 
   void setSelectedDay(DateTime day){
     _selectedDay = day;

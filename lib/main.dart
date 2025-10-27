@@ -1,10 +1,14 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'features/todoScreen/domain/calendar_state.dart';
 import 'features/todoScreen/domain/task_state.dart';
 import 'features/todoScreen/presentation/todo_screen.dart';
-import 'package:table_calendar/table_calendar.dart';
 void main() {
+  if (kDebugMode) {
+    print('Приложение запущенно');
+  }
+
   runApp(
     MultiProvider(
       providers: [

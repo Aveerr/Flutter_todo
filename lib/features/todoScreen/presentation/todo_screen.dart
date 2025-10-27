@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled2/features/todoScreen/domain/calendar_state.dart';
-import 'package:untitled2/theme/app_colors.dart';
 import 'package:untitled2/theme/app_gradients.dart';
 import '../presentation/todo_text_title.dart';
 import '../presentation/todo_table_calendar.dart';
@@ -18,6 +17,7 @@ class TodoScreen extends StatefulWidget{
 }
 
 class _TodoScreenState extends State<TodoScreen> {
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -35,12 +35,20 @@ class _TodoScreenState extends State<TodoScreen> {
           ),
           child: Padding(
             padding: const EdgeInsets.only(top: 75),
-            child: Column(
-              children: <Widget>[
-                TodoTextTitle(),
-                ToDoCalendar(),
-                ToDoTask()
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+
+                  TodoTextTitle(),
+                  ToDoCalendar(),
+                  ToDoTaskContainer(),
+                  Consumer<CalendarState>(
+                    builder: (context, calendarState, child) {
+                      return Text('Выбранная дата: ${calendarState.selectedDay}');
+                    },
+                  )
+                ],
+              ),
             ),
           ),
         ),
