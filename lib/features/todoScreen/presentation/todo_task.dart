@@ -14,7 +14,7 @@ class _ToDoTaskContainerState extends State<ToDoTaskContainer> {
   @override
   Widget build(BuildContext context) {
     var selectedDay = context.watch<CalendarState>().selectedDay;
-    String Date = '${selectedDay.year.toString()}.${selectedDay.month.toString()}.${selectedDay.day.toString()}';
+    String Date = context.watch<CalendarState>().getStringDate();
 
     return  Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),

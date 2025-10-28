@@ -52,7 +52,7 @@ class _ToDoFloatingActionButtonState extends State<ToDoFloatingActionButton> {
 
           builder: (context) {
             var selectedDay = context.read<CalendarState>().selectedDay;
-            String Date = '${selectedDay.year.toString()}.${selectedDay.month.toString()}.${selectedDay.day.toString()}';
+            String Date = context.watch<CalendarState>().getStringDate();
 
             return Padding(
               padding: const EdgeInsets.all(16.0),
@@ -60,7 +60,6 @@ class _ToDoFloatingActionButtonState extends State<ToDoFloatingActionButton> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text('Новая задача', style: TextStyle(fontSize: 20, color: Colors.white)),
-
                   TextField( /// ПОЛЕ ДЛЯ ВООДА НАЗВАНИЯ ТАСКИ
                     controller: _controller,
                     decoration: InputDecoration(
@@ -69,9 +68,7 @@ class _ToDoFloatingActionButtonState extends State<ToDoFloatingActionButton> {
                     ),
                     style: TextStyle(color: Colors.white),
                   ),
-
                   SizedBox(height: 12),
-
                   ElevatedButton( /// КНОПКА ДОБАВИТЬ
                     onPressed: () {
                       Provider.of<TaskState>(context, listen: false)

@@ -103,7 +103,7 @@ class _ToDoCalendarState extends State<ToDoCalendar> {
         },
 
         onDaySelected: (selectedDay, focusedDay) {
-          String Date = '${selectedDay.year.toString()}.${selectedDay.month.toString()}.${selectedDay.day.toString()}';
+          String Date = context.read<CalendarState>().getStringDate();
           print('#todo_table_calendare обработка нажатия $Date');
           setState(() {
             Provider.of<CalendarState>(context, listen: false).setSelectedDay(selectedDay);
