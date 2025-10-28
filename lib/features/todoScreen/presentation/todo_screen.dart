@@ -20,13 +20,9 @@ class _TodoScreenState extends State<TodoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => CalendarState(),
-      child: Scaffold(
+    return Scaffold(
         extendBodyBehindAppBar: true,
-
         appBar: TodoAppBar(),
-
         body: Container(
           width: double.infinity,
           height: double.infinity,
@@ -38,22 +34,15 @@ class _TodoScreenState extends State<TodoScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-
                   TodoTextTitle(),
                   ToDoCalendar(),
-                  ToDoTaskContainer(),
-                  Consumer<CalendarState>(
-                    builder: (context, calendarState, child) {
-                      return Text('Выбранная дата: ${calendarState.selectedDay}');
-                    },
-                  )
+                  ToDoTaskContainer()
                 ],
               ),
             ),
           ),
         ),
         floatingActionButton: ToDoFloatingActionButton()
-      ),
     );
   }
 }

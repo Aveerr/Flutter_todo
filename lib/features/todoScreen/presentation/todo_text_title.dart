@@ -9,7 +9,7 @@ class TodoTextTitle extends StatelessWidget{
       alignment: Alignment.centerLeft,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [ //🧩 Тест приложения
+        children: [
           Padding(
             padding: const EdgeInsets.only(left: 25),
             child: Text(

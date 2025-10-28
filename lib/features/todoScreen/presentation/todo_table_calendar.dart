@@ -103,12 +103,14 @@ class _ToDoCalendarState extends State<ToDoCalendar> {
         },
 
         onDaySelected: (selectedDay, focusedDay) {
+          String Date = '${selectedDay.year.toString()}.${selectedDay.month.toString()}.${selectedDay.day.toString()}';
+          print('#todo_table_calendare обработка нажатия $Date');
           setState(() {
             Provider.of<CalendarState>(context, listen: false).setSelectedDay(selectedDay);
             _selectedDay = selectedDay;
             _focusedDay = focusedDay; // 👈 обновляет фокус
           });
-          print('#обработка нажатия на календарь $_selectedDay $_focusedDay');
+
         },
         calendarFormat: CalendarFormat.week,
       ),

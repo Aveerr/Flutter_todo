@@ -2,12 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled2/theme/app_colors.dart';
 
-class CreateTask extends StatefulWidget{
+class Task extends StatefulWidget{
   final String title;
   int year;
   int month;
   int day;
-  CreateTask({
+  Task({
     super.key,
     required this.title,
     required this.year,
@@ -16,10 +16,10 @@ class CreateTask extends StatefulWidget{
   });
 
   @override
-  State<CreateTask> createState() => _CreateTaskState();
+  State<Task> createState() => _TaskState();
 }
 
-class _CreateTaskState extends State<CreateTask> {
+class _TaskState extends State<Task> {
   String get getTitle => widget.title;
   int get getYear => widget.year;
   int get getMonth => widget.month;

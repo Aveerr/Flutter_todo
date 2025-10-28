@@ -1,18 +1,31 @@
-import 'package:flutter/material.dart';
-
+import 'package:flutter/foundation.dart';
 import '../../../core/widget/task.dart';
 
 class TaskState extends ChangeNotifier {
-  final List<CreateTask> _tasks = [];
-  String _date = '';
-
-  List<CreateTask> get task => _tasks;
+  final Map<String, List<Task>> _tasks = {};
+  final String _date = '';
   String get date => _date;
+  List<Task> getTaskByDate(String Date){
+    return _tasks[Date] ?? [];
+  }
+  void addTask(String Date, Task task){
+    if (kDebugMode) {
+      print('task_state: Дата $Date');
+    }
+    if(_tasks[Date] == null) {
+      _tasks[Date] = [task];
+    } else {
+      _tasks[Date]?.add(task);
+    }
 
-  void addTask(CreateTask task, String Date){
-    _tasks.add(task);
-    _date = Date;
-    print('Добавлена новая задача на дату: $_date');
+    if (kDebugMode) {
+      print('#task_state - Добавлена новая задача на дату: $_tasks');
+    }
+    notifyListeners();
+  }
+
+  void removeTask(String Date, Task task){
+    _tasks[_date]?.remove(task);
     notifyListeners();
   }
 }
