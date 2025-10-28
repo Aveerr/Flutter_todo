@@ -1,42 +1,68 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:untitled2/features/todoScreen/domain/calendar_state.dart';
+import 'package:untitled2/theme/app_colors.dart';
 
-class CreateTask extends StatelessWidget{
+class CreateTask extends StatefulWidget{
   final String title;
-  const CreateTask({super.key, required this.title,  }); // ToDo: Добавить отдельный запрос на получение месяца и даты, потому что я не могу передать State Calendar ведь в таком случае он буде обновляться
+  int year;
+  int month;
+  int day;
+  CreateTask({
+    super.key,
+    required this.title,
+    required this.year,
+    required this.month,
+    required this.day,
+  });
+
+  @override
+  State<CreateTask> createState() => _CreateTaskState();
+}
+
+class _CreateTaskState extends State<CreateTask> {
+  String get getTitle => widget.title;
+  int get getYear => widget.year;
+  int get getMonth => widget.month;
+  int get getDay => widget.day;
 
   @override
   Widget build(BuildContext context) {
-    final selectedDay = context.read<CalendarState>().selectedDay;
-    print('dsds${selectedDay.month} ${selectedDay.day} ');
+    if (kDebugMode) {
+      print('Год: ${widget.year}, Месяц: ${widget.month}, День ${widget.day}');
+    }
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: 75,
-
-        decoration: BoxDecoration(
-          color: Color.fromRGBO(85, 83, 84, 1),
-          borderRadius: BorderRadius.circular(16), // 👈 радиус скругления
-        ),
-
-        child: Center(
-          child: Row(
-            children: [
-              Text(
-                title,
-                style: TextStyle(color: Colors.white, fontSize: 18),
-              ),
-              Text(
-                'Год: ${selectedDay.year}, Месяц: ${selectedDay.month}, День ${selectedDay.day}'
-              )
-            ],
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          minimumSize: Size(MediaQuery.of(context).size.width * 0.8, 80),
+          backgroundColor: AppColors.third, // цвет фона
+          foregroundColor: Colors.white,      // цвет текста
+          padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+          side: BorderSide(color: AppColors.secondary, width: 0.5),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(22), // скругление углов
           ),
+          elevation: 4, // тень
+        ),
+        onPressed: () {
+          setState(() {
+            widget.year++;
+          });
+        },
+        child: Row(
+          children: [
+            Text(
+              widget.title,
+              style: TextStyle(color: Colors.white, fontSize: 18),
+            ),
+            Text(
+              'Год: ${widget.year}, Месяц: ${widget.month}, День ${widget.day}'
+            )
+          ],
         ),
       ),
     );
   }
-
 }
 

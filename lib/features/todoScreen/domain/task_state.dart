@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/widget/task.dart';
+
 class TaskState extends ChangeNotifier {
-  final List<Widget> _tasks = [];
+  final List<CreateTask> _tasks = [];
+  String _date = '';
 
-  List<Widget> get task => _tasks;
+  List<CreateTask> get task => _tasks;
+  String get date => _date;
 
-  void addTask(Widget task){
+  void addTask(CreateTask task, String Date){
     _tasks.add(task);
+    _date = Date;
+    print('Добавлена новая задача на дату: $_date');
     notifyListeners();
   }
 }

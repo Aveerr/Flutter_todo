@@ -101,6 +101,7 @@ class _ToDoCalendarState extends State<ToDoCalendar> {
         selectedDayPredicate: (day) {
           return isSameDay(_selectedDay, day); // 👈 выделяет выбранную дату
         },
+
         onDaySelected: (selectedDay, focusedDay) {
           setState(() {
             Provider.of<CalendarState>(context, listen: false).setSelectedDay(selectedDay);

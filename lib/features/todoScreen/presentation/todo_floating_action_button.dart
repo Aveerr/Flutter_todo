@@ -51,8 +51,9 @@ class _ToDoFloatingActionButtonState extends State<ToDoFloatingActionButton> {
           backgroundColor: AppColors.third,
 
           builder: (context) {
-            DateTime? selectedDate = Provider.of<CalendarState>(context).selectedDay;
-            print(selectedDate);
+            var selectedDay = context.read<CalendarState>().selectedDay;
+            String Date = selectedDay.year.toString() + selectedDay.month.toString() + selectedDay.day.toString();
+
             return Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -73,14 +74,20 @@ class _ToDoFloatingActionButtonState extends State<ToDoFloatingActionButton> {
 
                   ElevatedButton( /// КНОПКА ДОБАВИТЬ
                     onPressed: () {
-                      Provider
-                        .of<TaskState>(context, listen: false)
-                        .addTask(
-                        CreateTask(
-                          title: _controller.text,
+                      //print((context.read<TaskState>().task[0].year));
 
-                        )
+                      Provider.of<TaskState>(context, listen: false)
+                      .addTask(
+                      CreateTask(
+                          title: _controller.text,
+                          year: selectedDay.year,
+                          month: selectedDay.month,
+                          day: selectedDay.day,
+                        ),
+                        Date
                       );
+
+                      print(Date);
                       _controller.clear();
                       Navigator.pop(context);
                     },
