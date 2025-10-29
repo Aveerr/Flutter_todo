@@ -1,10 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled2/theme/app_colors.dart';
-import 'package:provider/provider.dart';
-import 'package:untitled2/features/tasks/domain/tasks_list_state.dart';
-import 'package:untitled2/core/widget/task.dart';
-import 'package:untitled2/features/calendar/domain/calendar_state.dart';
+import '../../modalBottomSheet/presentation/modal_bottom_sheet.dart' show showAddModalBottom;
 
 class ToDoFloatingActionButton extends StatefulWidget {
   const ToDoFloatingActionButton({super.key});
@@ -14,7 +11,6 @@ class ToDoFloatingActionButton extends StatefulWidget {
 }
 
 class _ToDoFloatingActionButtonState extends State<ToDoFloatingActionButton> {
-  final TextEditingController _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
@@ -42,55 +38,8 @@ class _ToDoFloatingActionButtonState extends State<ToDoFloatingActionButton> {
             );
           }
         );*/
-        showModalBottomSheet(
-          context: context,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
-          ),
 
-          backgroundColor: AppColors.third,
-
-          builder: (context) {
-            var selectedDay = context.read<CalendarState>().selectedDay;
-            String Date = context.watch<CalendarState>().getStringDate();
-
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text('Новая задача', style: TextStyle(fontSize: 20, color: Colors.white)),
-                  TextField( /// ПОЛЕ ДЛЯ ВООДА НАЗВАНИЯ ТАСКИ
-                    controller: _controller,
-                    decoration: InputDecoration(
-                      hintText: 'Введите названи задачи',
-                      hintStyle: TextStyle(color: AppColors.textPrimary),
-                    ),
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  SizedBox(height: 12),
-                  ElevatedButton( /// КНОПКА ДОБАВИТЬ
-                    onPressed: () {
-                      Provider.of<TaskState>(context, listen: false)
-                      .addTask(
-                        Date,
-                        Task(
-                          title: _controller.text,
-                          year: selectedDay.year,
-                          month: selectedDay.month,
-                          day: selectedDay.day,
-                        )
-                      );
-                      _controller.clear();
-                      Navigator.pop(context);
-                    },
-                    child: Text('Добавить'),
-                  ),
-                ],
-              ),
-            );
-          },
-        );
+        showAddModalBottom(context);
       },
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(36),

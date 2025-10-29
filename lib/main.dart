@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'theme/app_theme.dart';
 import 'features/calendar/domain/calendar_state.dart';
 import 'features/tasks/domain/tasks_list_state.dart';
 import 'features/todoScreen/presentation/todo_screen.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: appTheme,
       locale: const Locale('ru', 'RU'), // 👈 текущая локаль
       routes: {
         '/': (context) => const TodoScreen()
