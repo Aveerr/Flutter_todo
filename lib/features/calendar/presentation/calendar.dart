@@ -16,13 +16,13 @@ class _ToDoCalendarState extends State<ToDoCalendar> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 18.0, bottom: 35),
+      padding: const EdgeInsets.only(top: 60.0, bottom: 35),
       child: TableCalendar(
         daysOfWeekStyle: DaysOfWeekStyle(
           weekdayStyle: TextStyle(
             fontFamily: 'Montserrat',
             fontSize: 13,
-            color: AppColors.primary,
+            color: Color.fromRGBO(255, 255, 255, 1),
             fontWeight: FontWeight.w200
           ), // Пн–Пт
           weekendStyle: TextStyle(
@@ -35,14 +35,14 @@ class _ToDoCalendarState extends State<ToDoCalendar> {
         calendarBuilders: CalendarBuilders(
           defaultBuilder: (context, date, _) {
             return Center(
-                child: Text(
-                  '${date.day}',
-                  style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 15,
-                      color: AppColors.primary
-                  ),
-                )
+              child: Text(
+                '${date.day}',
+                style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  fontSize: 15,
+                  color: Color.fromRGBO(255, 255, 255, 1)
+                ),
+              )
             );
           },
           selectedBuilder: (context, date, _) {
@@ -52,9 +52,9 @@ class _ToDoCalendarState extends State<ToDoCalendar> {
                 child: Text(
                   '${date.day}',
                   style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 25,
-                      color: Color.fromRGBO(216, 213, 213, 1.0)
+                    fontFamily: 'Montserrat',
+                    fontSize: 25,
+                    color: Color.fromRGBO(216, 213, 213, 1.0)
                   ),
                 )
               ),
@@ -80,18 +80,18 @@ class _ToDoCalendarState extends State<ToDoCalendar> {
           formatButtonVisible: false,
           leftChevronIcon: Icon(
             Icons.arrow_left_rounded,
-            color: AppColors.primary,
+            color: Color.fromRGBO(255, 255, 255, 1),
             size: 25,
           ),
           rightChevronIcon: Icon(
             Icons.arrow_right_rounded,
-            color: AppColors.primary,
+            color: Color.fromRGBO(255, 255, 255, 1),
             size: 25,
           ),
           titleTextStyle: TextStyle(
               fontFamily: 'Montserrat',
               fontSize: 30,
-              color: AppColors.primary
+              color: Color.fromRGBO(255, 255, 255, 1)
           ),
         ),
         firstDay: DateTime.utc(2020, 1, 1),

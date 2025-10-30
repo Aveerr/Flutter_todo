@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled2/theme/app_colors.dart';
 
 class Task extends StatefulWidget{
   final String title;
@@ -36,12 +35,12 @@ class _TaskState extends State<Task> {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           minimumSize: Size(MediaQuery.of(context).size.width * 0.8, 80),
-          backgroundColor: AppColors.third, // цвет фона
-          foregroundColor: Colors.white,      // цвет текста
+          backgroundColor: Colors.white, // цвет фона
+          foregroundColor: Colors.black,      // цвет текста
           padding: EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-          side: BorderSide(color: AppColors.secondary, width: 0.5),
+          side: BorderSide(color: Colors.white, width: 0.5),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(22), // скругление углов
+            borderRadius: BorderRadius.circular(15), // скругление углов
           ),
           elevation: 4, // тень
         ),
@@ -54,10 +53,11 @@ class _TaskState extends State<Task> {
           children: [
             Text(
               widget.title,
-              style: TextStyle(color: Colors.white, fontSize: 18),
+              style: TextStyle(color: Colors.black, fontSize: 18),
             ),
             Text(
-              'Год: ${widget.year}, Месяц: ${widget.month}, День ${widget.day}'
+              'Год: ${widget.year}, Месяц: ${widget.month}, День ${widget.day}',
+                style: TextStyle(color: Colors.black, fontSize: 18)
             )
           ],
         ),
