@@ -21,15 +21,15 @@ class _ToDoCalendarState extends State<ToDoCalendar> {
         daysOfWeekStyle: DaysOfWeekStyle(
           weekdayStyle: TextStyle(
             fontFamily: 'Montserrat',
-            fontSize: 13,
+            fontSize: 10,
             color: Color.fromRGBO(255, 255, 255, 1),
-            fontWeight: FontWeight.w200
+            fontWeight: FontWeight.w100
           ), // Пн–Пт
           weekendStyle: TextStyle(
-          fontFamily: 'Montserrat',
-            fontSize: 13,
-            color: AppColors.secondary,
-            fontWeight: FontWeight.bold
+            fontFamily: 'Montserrat',
+            fontSize: 10,
+            color: Color.fromRGBO(255, 255, 255, 1),
+            fontWeight: FontWeight.w100
           ),   // Сб–Вс
         ),
         calendarBuilders: CalendarBuilders(
@@ -40,7 +40,8 @@ class _ToDoCalendarState extends State<ToDoCalendar> {
                 style: TextStyle(
                   fontFamily: 'Montserrat',
                   fontSize: 15,
-                  color: Color.fromRGBO(255, 255, 255, 1)
+                  color: Color.fromRGBO(255, 255, 255, 1),
+                  fontWeight: FontWeight.w300
                 ),
               )
             );
@@ -49,12 +50,23 @@ class _ToDoCalendarState extends State<ToDoCalendar> {
             return Container(
               decoration: BoxDecoration(color: Colors.transparent, shape: BoxShape.circle),
               child: Center(
-                child: Text(
-                  '${date.day}',
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    fontSize: 25,
-                    color: Color.fromRGBO(216, 213, 213, 1.0)
+                child: Container(
+                  width: 45,
+                  height: 45,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Center(
+                    child: Text(
+                      '${date.day}',
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 15,
+                        color: Color.fromRGBO(0, 0, 0, 1.0),
+                        fontWeight: FontWeight.w700
+                      ),
+                    ),
                   ),
                 )
               ),
@@ -64,7 +76,7 @@ class _ToDoCalendarState extends State<ToDoCalendar> {
         calendarStyle: CalendarStyle(
           todayTextStyle: TextStyle(
               fontFamily: 'Montserrat',
-              fontSize: 25,
+              fontSize: 21,
               color: AppColors.secondary
           ),
           todayDecoration: BoxDecoration(

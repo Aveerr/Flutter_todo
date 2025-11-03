@@ -20,6 +20,7 @@ class _ToDoTaskContainerState extends State<ToDoTaskContainer> {
         padding: const EdgeInsets.symmetric(horizontal: 25),
         child: Consumer<TaskState>(
           builder: (context, taskState, child) {
+
             return Column(
               children: [
                 ...taskState.getTaskByDate(Date), // 👈 добавленные задачи

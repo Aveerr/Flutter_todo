@@ -8,6 +8,13 @@ class TaskState extends ChangeNotifier {
   List<Task> getTaskByDate(String Date){
     return _tasks[Date] ?? [];
   }
+
+  void printMapTask(){
+    if (kDebugMode) {
+      print(_tasks);
+    }
+  }
+
   void addTask(String Date, Task task){
     if (kDebugMode) {
       print('task_state: Дата $Date');

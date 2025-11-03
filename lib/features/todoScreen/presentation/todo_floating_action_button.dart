@@ -18,26 +18,6 @@ class _ToDoFloatingActionButtonState extends State<ToDoFloatingActionButton> {
         if (kDebugMode) {
           print('Созданна новая задача');
         }
-        /*showTimePicker(
-            context: context,
-            initialTime: TimeOfDay.now(),
-          builder: (context, child) {
-            return Theme(
-              data: Theme.of(context).copyWith(
-                colorScheme: ColorScheme.dark(
-                  primary: AppColors.secondary, // цвет акцента
-                  onSurface: Colors.white, // цвет текста
-                ),
-                textButtonTheme: TextButtonThemeData(
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.white,
-                  ),
-                ),
-              ),
-              child: child!,
-            );
-          }
-        );*/
 
         showAddModalBottom(context);
       },

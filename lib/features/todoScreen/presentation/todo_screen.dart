@@ -23,7 +23,7 @@ class _TodoScreenState extends State<TodoScreen> {
         width: double.infinity,
         height: double.infinity,
         decoration: BoxDecoration(
-          color: Colors.black26,
+          color: Colors.black54,
         ),
 
         child: Padding(
@@ -34,7 +34,7 @@ class _TodoScreenState extends State<TodoScreen> {
                   children: [
                     Center(
                       child: Container(
-                        width:MediaQuery.of(context).size.width * 0.95,
+                        width: MediaQuery.of(context).size.width * 0.95,
                         height: 220,
                         margin: EdgeInsets.only(top: 15),
                         decoration: BoxDecoration(
@@ -68,9 +68,9 @@ class _TodoScreenState extends State<TodoScreen> {
                             end: Alignment.bottomRight,
                             colors: [
                               Color.fromRGBO(255, 255, 255, 1.0),
-                              Color.fromRGBO(177, 177, 177, 1.0),
+                              Color.fromRGBO(200, 200, 200, 1.0),
                               Color.fromRGBO(255, 255, 255, 1.0),
-                              Color.fromRGBO(177, 177, 177, 1.0),
+                              Color.fromRGBO(200, 200, 200, 1.0),
                             ],
                           ),
                         ),
