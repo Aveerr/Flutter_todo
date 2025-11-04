@@ -19,6 +19,7 @@ class TaskState extends ChangeNotifier {
     if (kDebugMode) {
       print('task_state: Дата $Date');
     }
+
     if(_tasks[Date] == null) {
       _tasks[Date] = [task];
     } else {

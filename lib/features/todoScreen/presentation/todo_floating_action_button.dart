@@ -16,7 +16,7 @@ class _ToDoFloatingActionButtonState extends State<ToDoFloatingActionButton> {
     return FloatingActionButton(
       onPressed: () {
         if (kDebugMode) {
-          print('Созданна новая задача');
+          print('#todo_float_action_but Создание задачи');
         }
 
         showAddModalBottom(context);
