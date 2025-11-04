@@ -14,15 +14,12 @@ final ThemeData appTheme = ThemeData(
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      minimumSize: const Size(double.infinity, 80),
-      backgroundColor: AppColors.third,
       foregroundColor: Colors.white,
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
       side: BorderSide(color: AppColors.secondary, width: 0.5),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(22),
       ),
-      elevation: 4,
     ),
   ),
 );
