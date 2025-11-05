@@ -61,8 +61,7 @@ class _TaskTimeLimitState extends State<TaskTimeLimit> {
             Icons.arrow_forward_ios_outlined,
             size: 20,
           ),
-        ), /// просто стрелочка
-
+        ),
         TextButton(
           onPressed: () async{
             final pick = await _selectTime(context, TaskEndTime);
