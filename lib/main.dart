@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
+import 'features/modalBottomSheet/domain/modal_bottom_state.dart';
 import 'theme/app_theme.dart';
 import 'features/calendar/domain/calendar_state.dart';
 import 'features/tasks/domain/tasks_list_state.dart';
@@ -18,6 +19,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => CalendarState()),
         ChangeNotifierProvider(create: (_) => TaskState()),
+        ChangeNotifierProvider(create: (_) => ModalBottomState()),
       ],
       child: MyApp()
     ),

@@ -12,11 +12,13 @@ class ModalBottomState extends ChangeNotifier {
 
   // Сеттеры
   void setTaskStartTime(TimeOfDay time) {
+    print('#modal_bottom_state установленное время начала задачи $time');
     _taskStartTime = time;
     notifyListeners(); // обновляем UI
   }
 
   void setTaskEndTime(TimeOfDay time) {
+    print('#modal_bottom_state установленное время конца задачи $time');
     _taskEndTime = time;
     notifyListeners();
   }

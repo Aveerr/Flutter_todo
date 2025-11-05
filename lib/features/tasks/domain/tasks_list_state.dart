@@ -1,12 +1,11 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import '../../../core/widget/task.dart';
 
 class TaskState extends ChangeNotifier {
-  final Map<String, List<Task>> _tasks = {};
-  final String _date = '';
-  String get date => _date;
-  List<Task> getTaskByDate(String Date){
-    return _tasks[Date] ?? [];
+  final Map<String, List<dynamic>> _tasks = {};
+  List<dynamic> getTaskByDate(String date){
+    return _tasks[date] ?? [];
   }
 
   void printMapTask(){
@@ -15,15 +14,15 @@ class TaskState extends ChangeNotifier {
     }
   }
 
-  void addTask(String Date, Task task){
+  void addTask(String date, TimeOfDay taskStartTime, TimeOfDay taskEndTime, Task task){
     if (kDebugMode) {
-      print('task_state: Дата $Date');
+      print('task_state: Дата $date');
     }
 
-    if(_tasks[Date] == null) {
-      _tasks[Date] = [task];
+    if(_tasks[date] == null) {
+      _tasks[date] = [task, taskStartTime];
     } else {
-      _tasks[Date]?.add(task);
+      _tasks[date]?.add(task);
     }
 
     if (kDebugMode) {
@@ -32,8 +31,8 @@ class TaskState extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeTask(String Date, Task task){
-    _tasks[_date]?.remove(task);
+  void removeTask(String date, Task task){
+    _tasks[date]?.remove(task);
     notifyListeners();
   }
 }

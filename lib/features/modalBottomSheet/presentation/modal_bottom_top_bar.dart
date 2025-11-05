@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:untitled2/features/modalBottomSheet/domain/modal_bottom_state.dart';
 
 import '../../../core/widget/task.dart';
 import '../../tasks/domain/tasks_list_state.dart';
@@ -19,6 +20,8 @@ class TopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final modalState = context.read<ModalBottomState>();
+
     return Center(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -51,17 +54,28 @@ class TopBar extends StatelessWidget {
                 minimumSize: const Size(100, 50),
               ),
               onPressed: () {
-                Provider.of<TaskState>(context, listen: false).addTask(
-                  date,
-                  Task(
-                    title: controller.text,
-                    year: selectedDay.year,
-                    month: selectedDay.month,
-                    day: selectedDay.day,
-                  ),
-                );
-                controller.clear();
-                Navigator.pop(context);
+
+                if(
+                  controller.text != null &&
+                  modalState.taskStartTime != null &&
+                  modalState.taskEndTime != null
+                ){
+                  Provider.of<TaskState>(context, listen: false).addTask(
+                    date,
+                    modalState.taskStartTime!,
+                    modalState.taskEndTime!,
+                    Task(
+                      title: controller.text,
+                      year: selectedDay.year,
+                      month: selectedDay.month,
+                      day: selectedDay.day,
+                    ),
+                  );
+                  controller.clear();
+                  Navigator.pop(context);
+                } else {
+                  print('#modal_bottom_top_bar нехватает данных для добавления задачи');
+                }
               },
               child: Row(
                 children: [

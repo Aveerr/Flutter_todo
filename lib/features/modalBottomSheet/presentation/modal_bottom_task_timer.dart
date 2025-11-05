@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../domain/modal_bottom_state.dart';
 
 class TaskTimeLimit extends StatefulWidget {
   const TaskTimeLimit({super.key});
@@ -20,7 +23,7 @@ class _TaskTimeLimitState extends State<TaskTimeLimit> {
   TimeOfDay? TaskEndTime = null;
   @override
   Widget build(BuildContext context) {
-
+    final modalState = context.read<ModalBottomState>();
 
     return Row(
       children: [
@@ -29,11 +32,10 @@ class _TaskTimeLimitState extends State<TaskTimeLimit> {
           onPressed: () async{
             final pick = await _selectTime(context, TaskStartTime);
             print(pick);
-            if (pick != null){
-              setState(() {
-                TaskStartTime = pick;
-              });
-            }
+            modalState.setTaskStartTime(pick!);
+            setState(() {
+              TaskStartTime = pick;
+            });
           },
           child: Row(
             children: [
@@ -66,11 +68,10 @@ class _TaskTimeLimitState extends State<TaskTimeLimit> {
           onPressed: () async{
             final pick = await _selectTime(context, TaskEndTime);
             print(pick);
-            if (pick != null){
-              setState(() {
-                TaskEndTime = pick;
-              });
-            }
+            modalState.setTaskEndTime(pick!);
+            setState(() {
+              TaskEndTime = pick;
+            });
           },
           child: Row(
             children: [
