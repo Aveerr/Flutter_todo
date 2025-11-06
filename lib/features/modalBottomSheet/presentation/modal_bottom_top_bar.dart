@@ -66,6 +66,8 @@ class TopBar extends StatelessWidget {
                     modalState.taskEndTime!,
                     Task(
                       title: controller.text,
+                      taskStartTime: modalState.taskStartTime!,
+                      taskEndTime: modalState.taskEndTime!,
                       year: selectedDay.year,
                       month: selectedDay.month,
                       day: selectedDay.day,

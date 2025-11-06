@@ -6,9 +6,13 @@ class Task extends StatefulWidget{
   int year;
   int month;
   int day;
+  TimeOfDay taskStartTime;
+  TimeOfDay taskEndTime;
   Task({
     super.key,
     required this.title,
+    required this.taskStartTime,
+    required this.taskEndTime,
     required this.year,
     required this.month,
     required this.day,
@@ -23,6 +27,8 @@ class _TaskState extends State<Task> {
   int get getYear => widget.year;
   int get getMonth => widget.month;
   int get getDay => widget.day;
+  TimeOfDay get getTaskStartTime => widget.taskStartTime;
+  TimeOfDay get getTaskEndTime => widget.taskEndTime;
 
   @override
   Widget build(BuildContext context) {
@@ -50,15 +56,21 @@ class _TaskState extends State<Task> {
           });
         },
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text(
-              widget.title,
-              style: TextStyle(color: Colors.black, fontSize: 18),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.title,
+                  style: TextStyle(color: Colors.black, fontSize: 24),
+                ),
+                Text(
+                  '${getTaskStartTime.hour}:${getTaskStartTime.minute} - ${getTaskEndTime.hour}:${getTaskEndTime.minute} ',
+                    style: TextStyle(color: Colors.grey, fontSize: 16)
+                )
+              ],
             ),
-            Text(
-              'Год: ${widget.year}, Месяц: ${widget.month}, День ${widget.day}',
-                style: TextStyle(color: Colors.black, fontSize: 18)
-            )
           ],
         ),
       ),
