@@ -7,12 +7,17 @@ import 'theme/app_theme.dart';
 import 'features/calendar/domain/calendar_state.dart';
 import 'features/tasks/domain/tasks_list_state.dart';
 import 'features/todoScreen/presentation/todo_screen.dart';
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+Future<void> main() async {
 
   if (kDebugMode) {
     print('Приложение запущенно');
   }
-
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
 
     MultiProvider(
