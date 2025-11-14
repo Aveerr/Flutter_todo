@@ -9,7 +9,7 @@ class Task extends StatefulWidget{
   final TimeOfDay taskStartTime;
   final TimeOfDay taskEndTime;
 
-  Task({
+  const Task({
     super.key,
     required this.title,
     required this.taskStartTime,
@@ -59,7 +59,23 @@ class _TaskState extends State<Task> {
         
         onPressed: () {
           setState(() {
+            showDialog(
+              context: context,
+              builder: (context) => Dialog(
 
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Container(
+                    width: 100,
+                    height: 100,
+                    child: Center(child: Text('ПОКА ЗДЕСЬ НИЧЕГО НЕТУ')),
+                  ),
+                ),
+              ),
+            );
           });
         },
         
@@ -83,6 +99,7 @@ class _TaskState extends State<Task> {
             Checkbox(
               activeColor: Color.fromRGBO(60, 159, 174, 1),
               value: isChecked,
+
               onChanged: (bool? value) {
                 setState(() {
                   isChecked = value ?? false;
