@@ -19,8 +19,8 @@ Future<TimeOfDay?> _selectTime(BuildContext context, TimeOfDay? initialTime) asy
 }
 
 class _TaskTimeLimitState extends State<TaskTimeLimit> {
-  TimeOfDay? TaskStartTime = null;
-  TimeOfDay? TaskEndTime = null;
+  TimeOfDay? TaskStartTime;
+  TimeOfDay? TaskEndTime;
   @override
   Widget build(BuildContext context) {
     final modalState = context.read<ModalBottomState>();
@@ -69,6 +69,7 @@ class _TaskTimeLimitState extends State<TaskTimeLimit> {
             final pick = await _selectTime(context, TaskEndTime);
             print(pick);
             modalState.setTaskEndTime(pick!);
+
             setState(() {
               TaskEndTime = pick;
             });

@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:untitled2/features/calendar/domain/calendar_state.dart';
-import 'package:untitled2/theme/app_gradients.dart';
-import '../presentation/todo_text_title.dart';
 import '../../calendar/presentation/calendar.dart';
 import 'todo_appbar.dart';
 import '../../tasks/presentation/tasks_list.dart';

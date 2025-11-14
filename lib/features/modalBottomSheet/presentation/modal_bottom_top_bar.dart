@@ -48,43 +48,43 @@ class TopBar extends StatelessWidget {
               )
           ), ///НОВАЯ ЗАДАЧА НАДПИСЬ
           ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent,
-                side: BorderSide(color: Colors.transparent, width: 0),
-                minimumSize: const Size(100, 50),
-              ),
-              onPressed: () {
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.transparent,
+              side: BorderSide(color: Colors.transparent, width: 0),
+              minimumSize: const Size(100, 50),
+            ),
+            onPressed: () {
 
-                if(
-                  controller.text != null &&
-                  modalState.taskStartTime != null &&
-                  modalState.taskEndTime != null
-                ){
-                  Provider.of<TaskState>(context, listen: false).addTask(
-                    date,
-                    modalState.taskStartTime!,
-                    modalState.taskEndTime!,
-                    Task(
-                      title: controller.text,
-                      taskStartTime: modalState.taskStartTime!,
-                      taskEndTime: modalState.taskEndTime!,
-                      year: selectedDay.year,
-                      month: selectedDay.month,
-                      day: selectedDay.day,
-                    ),
-                  );
-                  controller.clear();
-                  Navigator.pop(context);
-                } else {
+              if(
+                controller.text != "" &&
+                modalState.taskStartTime != null &&
+                modalState.taskEndTime != null
+              ){
+                Provider.of<TaskState>(context, listen: false).addTask(
+                  date,
+                  Task(
+                    title: controller.text,
+                    taskStartTime: modalState.taskStartTime!, // берётся время из стейта и заноситься в таску
+                    taskEndTime: modalState.taskEndTime!, // same shit
+                    year: selectedDay.year,
+                    month: selectedDay.month,
+                    day: selectedDay.day,
+                  ),
+                );
+                controller.clear();
+                Navigator.pop(context);
+              } else {
+                if (kDebugMode) {
                   print('#modal_bottom_top_bar нехватает данных для добавления задачи');
                 }
-              },
-              child: Row(
-                children: [
-                  Icon(Icons.access_time),
-                  Text('Добавить'),
-                ],
-              )
+              }
+            },
+            child: Row(
+              children: [
+                Icon(Icons.access_time),
+                Text('Добавить'),
+              ],
+            )
           ), /// СОЗДАТЬ ЗАДАЧУ
         ],
       ),

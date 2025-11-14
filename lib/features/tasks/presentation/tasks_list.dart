@@ -16,15 +16,17 @@ class _ToDoTaskContainerState extends State<ToDoTaskContainer> {
   Widget build(BuildContext context) {
     //var selectedDay = context.watch<CalendarState>().selectedDay;
     String date = context.watch<CalendarState>().getStringDate();
+    List<Task> tasksEntry = context.watch<TaskState>().getTaskByDate(date);
 
-    List<TaskEntry> tasksEntry = context.watch<TaskState>().getTaskByDate(date);
-    List<Task> tasks = tasksEntry.map((entry) => entry.task).toList();
+    for (Task task in tasksEntry){
+      task.setTitle();
+    }
 
     return  Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
       child: Column(
-        children: [ /// я хз что тут не так, мы получаем по дате суть в том что он скорее всего возвращает несколько типов и он не моджет определиться
-          ...tasks, // 👈 добавленные задачи
+        children: [
+          ...tasksEntry, // отрисовка списка всех задач в виджете Column
         ],
       )
     );

@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 
 class Task extends StatefulWidget{
   final String title;
-  int year;
-  int month;
-  int day;
-  TimeOfDay taskStartTime;
-  TimeOfDay taskEndTime;
+  final int year;
+  final int month;
+  final int day;
+  final TimeOfDay taskStartTime;
+  final TimeOfDay taskEndTime;
+
   Task({
     super.key,
     required this.title,
@@ -18,11 +19,16 @@ class Task extends StatefulWidget{
     required this.day,
   });
 
+  void setTitle(){
+    //this.title = "d";
+  }
+
   @override
   State<Task> createState() => _TaskState();
 }
 
 class _TaskState extends State<Task> {
+  bool isChecked = false;
   String get getTitle => widget.title;
   int get getYear => widget.year;
   int get getMonth => widget.month;
@@ -33,7 +39,7 @@ class _TaskState extends State<Task> {
   @override
   Widget build(BuildContext context) {
     if (kDebugMode) {
-      print('Год: ${widget.year}, Месяц: ${widget.month}, День ${widget.day}');
+      print('#task: Отрисованна задача - Title: ${widget.title}, StartTime: ${widget.taskStartTime}, День ${widget.day}');
     }
 
     return Padding(
@@ -50,11 +56,13 @@ class _TaskState extends State<Task> {
           ),
           elevation: 4, // тень
         ),
+        
         onPressed: () {
           setState(() {
-            widget.year++;
+
           });
         },
+        
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -71,6 +79,15 @@ class _TaskState extends State<Task> {
                 )
               ],
             ),
+            Spacer(),
+            Checkbox(
+              activeColor: Color.fromRGBO(60, 159, 174, 1),
+              value: isChecked,
+              onChanged: (bool? value) {
+                setState(() {
+                  isChecked = value ?? false;
+                });
+              },)
           ],
         ),
       ),
