@@ -26,7 +26,7 @@ class TopBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ElevatedButton(
+          TextButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.transparent,
                 side: BorderSide(color: Colors.transparent, width: 0),
@@ -38,16 +38,26 @@ class TopBar extends StatelessWidget {
                   print('#moddal_bottom отменено создание задачи');
                 }
               },
-              child: Text('Отменить')
+              child: Text(
+                'Отменить',
+                style: TextStyle(
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                )
+              )
           ), ///ОТМЕНИТЬ ЗАДАЧУ
           Expanded(
               child: Text(
                 'Новая задача',
-                style: TextStyle(fontSize: 20, color: Colors.black),
+                style: TextStyle(
+                    fontSize: 24,
+                    color: Colors.black
+                ),
                 textAlign: TextAlign.center,
               )
           ), ///НОВАЯ ЗАДАЧА НАДПИСЬ
-          ElevatedButton(
+          TextButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.transparent,
               side: BorderSide(color: Colors.transparent, width: 0),
@@ -79,12 +89,15 @@ class TopBar extends StatelessWidget {
                 }
               }
             },
-            child: Row(
-              children: [
-                Icon(Icons.access_time),
-                Text('Добавить'),
-              ],
-            )
+
+            child: Text(
+              'Добавить',
+              style: TextStyle(
+                color: Colors.green,
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+              )
+            ),
           ), /// СОЗДАТЬ ЗАДАЧУ
         ],
       ),

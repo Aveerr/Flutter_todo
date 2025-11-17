@@ -69,9 +69,43 @@ class _TaskState extends State<Task> {
                 child: Padding(
                   padding: EdgeInsets.all(16),
                   child: Container(
-                    width: 100,
+                    width: 200,
                     height: 100,
-                    child: Center(child: Text('ПОКА ЗДЕСЬ НИЧЕГО НЕТУ')),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            TextButton(
+                                onPressed: (){},
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.red,
+                                ),
+                                child: Text(
+                                  'Выйти',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                  ),)
+                            ),
+                            Spacer(),
+                            TextButton(
+                                onPressed: (){},
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.green,
+                                ),
+                                child: Text(
+                                  'Сохранить',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                  ),
+                                )
+                            ),
+                          ],
+                        ),
+                        Center(child: Text('ПОКА ЗДЕСЬ НИЧЕГО НЕТУ')),
+                      ],
+                    ),
                   ),
                 ),
               ),

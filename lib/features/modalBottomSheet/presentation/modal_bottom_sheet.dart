@@ -32,18 +32,39 @@ void showAddModalBottom(BuildContext context){
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TopBar(selectedDay: selectedDay, date: date, controller: controller),
-              TaskTimeLimit(),
-              SizedBox(height: 12),
-              TextField(
-                controller: controller,
-                decoration: InputDecoration(
-                  hintText: 'Введите название задачи',
-                  hintStyle: TextStyle(color: AppColors.textPrimary),
+              Container(
+                margin: EdgeInsets.only(top: 30),
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(
+                    color: Colors.grey.shade200,
+                    width: 1.4,
+                  ),
                 ),
-                style: TextStyle(color: Colors.black),
+                child: TextField(
+                  controller: controller,
+                  decoration: InputDecoration(
+                    hintText: 'Введите название задачи',
+                    hintStyle: TextStyle(color: AppColors.textPrimary),
+                  ),
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
-              SizedBox(height: 2),
 
+              Container(
+                padding:  EdgeInsets.all(10),
+                margin: EdgeInsets.only(top: 20, bottom: 20),
+                decoration: BoxDecoration(
+                  color: Color.fromRGBO(248, 250, 251, 1),
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(
+                    color: Colors.grey.shade200,
+                    width: 1.4,
+                  )
+                ),
+                child: TaskTimeLimit()
+              ),
             ],
           ),
         ),
