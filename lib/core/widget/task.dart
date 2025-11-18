@@ -1,15 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import '../../features/DialogWindow/presentation/dialog_window.dart';
 
 class Task extends StatefulWidget{
-  final String title;
-  final int year;
-  final int month;
-  final int day;
-  final TimeOfDay taskStartTime;
-  final TimeOfDay taskEndTime;
+  String title;
+  int year;
+  int month;
+  int day;
+  TimeOfDay taskStartTime;
+  TimeOfDay taskEndTime;
 
-  const Task({
+  Task({
     super.key,
     required this.title,
     required this.taskStartTime,
@@ -19,8 +20,8 @@ class Task extends StatefulWidget{
     required this.day,
   });
 
-  void setTitle(){
-    //this.title = "d";
+  void setTitle(String title){
+    //this.title = title;
   }
 
   @override
@@ -38,6 +39,12 @@ class _TaskState extends State<Task> {
 
   @override
   Widget build(BuildContext context) {
+    void updateTask() {
+      setState(() {
+
+      });
+    }
+
     if (kDebugMode) {
       print('#task: Отрисованна задача - Title: ${widget.title}, StartTime: ${widget.taskStartTime}, День ${widget.day}');
     }
@@ -59,57 +66,7 @@ class _TaskState extends State<Task> {
         
         onPressed: () {
           setState(() {
-            showDialog(
-              context: context,
-              builder: (context) => Dialog(
-
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(16),
-                  child: Container(
-                    width: 200,
-                    height: 100,
-                    child: Column(
-                      children: [
-                        Row(
-                          children: [
-                            TextButton(
-                                onPressed: (){},
-                                style: TextButton.styleFrom(
-                                  foregroundColor: Colors.red,
-                                ),
-                                child: Text(
-                                  'Выйти',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
-                                  ),)
-                            ),
-                            Spacer(),
-                            TextButton(
-                                onPressed: (){},
-                                style: TextButton.styleFrom(
-                                  foregroundColor: Colors.green,
-                                ),
-                                child: Text(
-                                  'Сохранить',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
-                                  ),
-                                )
-                            ),
-                          ],
-                        ),
-                        Center(child: Text('ПОКА ЗДЕСЬ НИЧЕГО НЕТУ')),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            );
+            showDialogWindow(context, getTitle, widget, onSave: updateTask);
           });
         },
         

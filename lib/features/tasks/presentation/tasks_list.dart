@@ -19,7 +19,7 @@ class _ToDoTaskContainerState extends State<ToDoTaskContainer> {
     List<Task> tasksEntry = context.watch<TaskState>().getTaskByDate(date);
 
     for (Task task in tasksEntry){
-      task.setTitle();
+      task.setTitle('s');
     }
 
     return  Padding(

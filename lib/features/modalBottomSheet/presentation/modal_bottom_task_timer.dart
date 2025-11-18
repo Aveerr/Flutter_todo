@@ -29,43 +29,45 @@ class _TaskTimeLimitState extends State<TaskTimeLimit> {
       child: Row(
         children: [
           Padding(padding: EdgeInsets.only(top: 50)),
-          Container(
-            width: 130,
-            height: 50,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.grey.shade200,
-                width: 1.4,
+          Expanded(
+            child: Container(
+              width: 130,
+              height: 50,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.grey.shade200,
+                  width: 1.4,
+                ),
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15)
               ),
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15)
-            ),
-            child: TextButton(
-              onPressed: () async{
-                final pick = await _selectTime(context, TaskStartTime);
-                print(pick);
-                modalState.setTaskStartTime(pick!);
-                setState(() {
-                  TaskStartTime = pick;
-                });
-              },
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                    child: Icon(
-                      Icons.access_time,
-                      color: Colors.black
+              child: TextButton( //НАЧАЛО ВРЕМЕНИ
+                onPressed: () async{
+                  final pick = await _selectTime(context, TaskStartTime);
+                  print(pick);
+                  modalState.setTaskStartTime(pick!);
+                  setState(() {
+                    TaskStartTime = pick;
+                  });
+                },
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                      child: Icon(
+                        Icons.access_time,
+                        color: Colors.black
+                      ),
                     ),
-                  ),
-                  Text(
-                    TaskStartTime?.format(context) ?? "начало",
-                    style: TextStyle(
-                      color: Colors.black87,
-                      fontSize: 18,
+                    Text(
+                      TaskStartTime?.format(context) ?? "начало",
+                      style: TextStyle(
+                        color: Colors.black87,
+                        fontSize: 18,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ), ///Начало задачи
@@ -84,44 +86,46 @@ class _TaskTimeLimitState extends State<TaskTimeLimit> {
             ),
           ),
 
-          Container(
-            width: 130,
-            height: 50,
-            decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.grey.shade200,
-                  width: 1.4,
-                ),
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(15)
-            ),
-            child: TextButton(
-              onPressed: () async{
-                final pick = await _selectTime(context, TaskEndTime);
-                print(pick);
-                modalState.setTaskEndTime(pick!);
+          Expanded(
+            child: Container(
+              width: 130,
+              height: 50,
+              decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.grey.shade200,
+                    width: 1.4,
+                  ),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15)
+              ),
+              child: TextButton( //КОНЕЦ ВРЕМЕНИ
+                onPressed: () async{
+                  final pick = await _selectTime(context, TaskEndTime);
+                  print(pick);
+                  modalState.setTaskEndTime(pick!);
 
-                setState(() {
-                  TaskEndTime = pick;
-                });
-              },
-              child: Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsetsGeometry.symmetric(horizontal: 5),
-                    child: Icon(
-                      Icons.access_time,
-                      color: Colors.black,
+                  setState(() {
+                    TaskEndTime = pick;
+                  });
+                },
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsGeometry.symmetric(horizontal: 5),
+                      child: Icon(
+                        Icons.access_time,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
-                  Text(
-                    TaskEndTime?.format(context) ?? "конец",
-                    style: TextStyle(
-                      color: Colors.black87,
-                      fontSize: 18,
+                    Text(
+                      TaskEndTime?.format(context) ?? "конец",
+                      style: TextStyle(
+                        color: Colors.black87,
+                        fontSize: 18,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           )
