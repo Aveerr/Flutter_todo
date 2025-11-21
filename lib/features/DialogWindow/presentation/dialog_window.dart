@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled2/core/widget/task.dart';
 
@@ -11,15 +12,12 @@ Future<TimeOfDay?> _selectTime(BuildContext context, TimeOfDay? initialTime) asy
     initialTime: initialTime ?? TimeOfDay.now(), // если null — используем текущее время
   );
 }
-Future<dynamic> showDialogWindow(BuildContext context, String title, Task widget,{
-  required VoidCallback onSave, // Добавляем callback
-})
+Future<dynamic> showDialogWindow(BuildContext context, String title, Task widget)
 {
-
-
-  TimeOfDay? TaskStartTime;
-  TimeOfDay? TaskEndTime;
   final TextEditingController controller = TextEditingController();
+  final dialogState = context.read<DialogWindowState>();
+  dialogState.setTask(widget);
+  controller.text = widget.title;
 
   return showDialog(
     context: context,
@@ -35,7 +33,7 @@ Future<dynamic> showDialogWindow(BuildContext context, String title, Task widget
           height: 400,
           child: Column(
             children: [
-              DialogWindowTopbar(widget: widget, onSave: onSave, controller: controller,),
+              DialogWindowTopbar(widget: widget),
               Container(
                 margin: EdgeInsets.only(top: 30),
                 padding: EdgeInsets.symmetric(horizontal: 10),
@@ -47,9 +45,18 @@ Future<dynamic> showDialogWindow(BuildContext context, String title, Task widget
                   ),
                 ),
                 child: TextField(
-                  onChanged:  (value){
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(30),
+                    FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]')),
+                  ],
+                  controller: controller,
+                  onTapOutside:  (event){
                     final dialogState = context.read<DialogWindowState>();
-                    dialogState.setTitle(value);
+                    dialogState.setTitle(controller.text);
+                  },
+                  onEditingComplete:  (){
+                    final dialogState = context.read<DialogWindowState>();
+                    dialogState.setTitle(controller.text);
                   },
                   decoration: InputDecoration(
                     focusColor: Colors.black,
@@ -92,34 +99,33 @@ Future<dynamic> showDialogWindow(BuildContext context, String title, Task widget
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(15)
                             ),
-                            child: TextButton( //НАЧАЛО ВРЕМЕНИ
-                              onPressed: () async{
-                                final pick = await _selectTime(context, TaskStartTime);
-                                print(pick);
-
-                                // setState(() {
-                                // TaskStartTime = pick;
-                                // });
+                            child: Consumer<DialogWindowState>(
+                              builder: (context, dialogState, child) {
+                                return TextButton(
+                                  onPressed: () async {
+                                    final pick = await _selectTime(context, dialogState.getTaskStartTime);
+                                    if (pick != null) {
+                                      dialogState.setTaskStartTime(pick);
+                                    }
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 5),
+                                        child: Icon(Icons.access_time, color: Colors.black),
+                                      ),
+                                      Text(
+                                        dialogState.getTaskStartTime?.format(context) ?? "начало", // берем из провайдера
+                                        style: TextStyle(
+                                          color: Colors.black87,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
                               },
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                                    child: Icon(
-                                        Icons.access_time,
-                                        color: Colors.black
-                                    ),
-                                  ),
-                                  Text(
-                                    TaskStartTime?.format(context) ?? "начало",
-                                    style: TextStyle(
-                                      color: Colors.black87,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            )
                           ),
                         ), ///Начало задачи
 
@@ -149,36 +155,39 @@ Future<dynamic> showDialogWindow(BuildContext context, String title, Task widget
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(15)
                             ),
-                            child: TextButton( //КОНЕЦ ВРЕМЕНИ
-                              onPressed: () async{
-                                final pick = await _selectTime(context, TaskEndTime);
-                                print(pick);
-
-                                // setState(() {
-                                // TaskEndTime = pick;
-                                // });
+                            child: Consumer<DialogWindowState>(
+                              builder: (context, dialogState, child) {
+                                return TextButton( //КОНЕЦ ВРЕМЕНИ
+                                  onPressed: () async {
+                                    final pick = await _selectTime(context, dialogState.getTaskEndTime);
+                                    print(pick);
+                                    dialogState.setTaskEndTime(pick!);
+                                  },
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsGeometry.symmetric(
+                                            horizontal: 5),
+                                        child: Icon(
+                                          Icons.access_time,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      Text(
+                                        dialogState.getTaskEndTime?.format(
+                                            context) ?? "конец",
+                                        style: TextStyle(
+                                          color: Colors.black87,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
                               },
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsGeometry.symmetric(horizontal: 5),
-                                    child: Icon(
-                                      Icons.access_time,
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                  Text(
-                                    TaskEndTime?.format(context) ?? "конец",
-                                    style: TextStyle(
-                                      color: Colors.black87,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            )
                           ),
-                        )
+                        ),
                       ],
                     ),
                   )

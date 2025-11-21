@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../core/widget/task.dart';
+import '../domain/dialog_window_state.dart';
 
-class DialogWindowTopbar extends StatelessWidget {
+void update(Task widget, BuildContext context) {
+  print('вызван апдейт');
+  final dialogState = context.read<DialogWindowState>();
+  dialogState.update();
+}
+class DialogWindowTopbar extends StatefulWidget {
   final Task widget;
-  final VoidCallback onSave;
-  final TextEditingController controller;
+
   const DialogWindowTopbar(
-    {Key? key, required this.widget, required this.onSave, required this.controller}
-  ) : super(key: key);
+    {super.key, required this.widget}
+  );
 
   @override
+  State<DialogWindowTopbar> createState() => _DialogWindowTopbarState();
+}
+
+class _DialogWindowTopbarState extends State<DialogWindowTopbar> {
+  @override
   Widget build(BuildContext context) {
-    controller.text = widget.title;
     return Row(
       children: [
         TextButton(
@@ -32,8 +42,7 @@ class DialogWindowTopbar extends StatelessWidget {
         Spacer(), //ПУПА
         TextButton(
             onPressed: (){
-              widget.title = controller.text;
-              onSave();
+              update(widget.widget, context);
               Navigator.pop(context);
             },
             style: TextButton.styleFrom(

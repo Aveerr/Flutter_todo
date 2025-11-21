@@ -1,52 +1,70 @@
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../features/DialogWindow/domain/dialog_window_state.dart';
 import '../../features/DialogWindow/presentation/dialog_window.dart';
 
 class Task extends StatefulWidget{
-  String title;
-  int year;
-  int month;
-  int day;
-  TimeOfDay taskStartTime;
-  TimeOfDay taskEndTime;
+  String _title = '';
+  int _year = DateTime.now().year;
+  int _month = DateTime.now().month;
+  int _day = DateTime.now().day;
+  TimeOfDay? _taskStartTime;
+  TimeOfDay? _taskEndTime;
+
+  // Геттеры
+  String get title => _title;
+  int get year => _year;
+  int get month => _month;
+  int get day => _day;
+  TimeOfDay? get taskStartTime => _taskStartTime;
+  TimeOfDay? get taskEndTime => _taskEndTime;
+
+  void setTitle(String value) {
+    _title = value;
+  }
+  void setYear(int value) {
+    _year = value;
+  }
+  void setMonth(int value) {
+    _month = value;
+  }
+  void setDay(int value) {
+    _day = value;
+  }
+  void setTaskStartTime(TimeOfDay value) {
+    _taskStartTime = value;
+  }
+  void setTaskEndTime(TimeOfDay value) {
+    _taskEndTime = value;
+  }
+
 
   Task({
     super.key,
-    required this.title,
-    required this.taskStartTime,
-    required this.taskEndTime,
-    required this.year,
-    required this.month,
-    required this.day,
-  });
+    required String title,
+    required TimeOfDay taskStartTime,
+    required TimeOfDay taskEndTime,
+    required int year,
+    required int month,
+    required int day,
+  }) : _taskEndTime = taskEndTime, _taskStartTime = taskStartTime, _day = day, _month = month, _year = year, _title = title;
+  bool isChecked = false;
 
-  void setTitle(String title){
-    //this.title = title;
-  }
 
   @override
   State<Task> createState() => _TaskState();
 }
 
 class _TaskState extends State<Task> {
-  bool isChecked = false;
-  String get getTitle => widget.title;
-  int get getYear => widget.year;
-  int get getMonth => widget.month;
-  int get getDay => widget.day;
-  TimeOfDay get getTaskStartTime => widget.taskStartTime;
-  TimeOfDay get getTaskEndTime => widget.taskEndTime;
 
   @override
   Widget build(BuildContext context) {
-    void updateTask() {
-      setState(() {
-
-      });
-    }
+    final dialogState = context.watch<DialogWindowState>();
 
     if (kDebugMode) {
-      print('#task: Отрисованна задача - Title: ${widget.title}, StartTime: ${widget.taskStartTime}, День ${widget.day}');
+      print('#task: Отрисованна задача - Title: ${widget.title}, StartTime: ${widget.taskStartTime}, EndTime: ${widget.taskEndTime}, День ${widget.day}');
     }
 
     return Padding(
@@ -65,9 +83,7 @@ class _TaskState extends State<Task> {
         ),
         
         onPressed: () {
-          setState(() {
-            showDialogWindow(context, getTitle, widget, onSave: updateTask);
-          });
+          showDialogWindow(context, widget.title, widget);
         },
         
         child: Row(
@@ -81,7 +97,7 @@ class _TaskState extends State<Task> {
                   style: TextStyle(color: Colors.black, fontSize: 24),
                 ),
                 Text(
-                  '${getTaskStartTime.hour}:${getTaskStartTime.minute} - ${getTaskEndTime.hour}:${getTaskEndTime.minute} ',
+                  '${widget.taskStartTime?.hour}:${widget.taskStartTime?.minute} - ${widget.taskEndTime?.hour}:${widget.taskEndTime?.minute} ',
                     style: TextStyle(color: Colors.grey, fontSize: 16)
                 )
               ],
@@ -89,11 +105,11 @@ class _TaskState extends State<Task> {
             Spacer(),
             Checkbox(
               activeColor: Color.fromRGBO(60, 159, 174, 1),
-              value: isChecked,
+              value: widget.isChecked,
 
               onChanged: (bool? value) {
                 setState(() {
-                  isChecked = value ?? false;
+                  widget.isChecked = value ?? false;
                 });
               },)
           ],

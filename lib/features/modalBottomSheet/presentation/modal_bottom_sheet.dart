@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../../../theme/app_colors.dart';
 import '../../calendar/domain/calendar_state.dart';
@@ -43,6 +44,10 @@ void showAddModalBottom(BuildContext context){
                   ),
                 ),
                 child: TextField(
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(30),
+                    FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]')),
+                  ],
                   controller: controller,
                   decoration: InputDecoration(
                     hintText: 'Введите название задачи',

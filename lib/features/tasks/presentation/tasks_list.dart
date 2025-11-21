@@ -14,13 +14,8 @@ class ToDoTaskContainer extends StatefulWidget{
 class _ToDoTaskContainerState extends State<ToDoTaskContainer> {
   @override
   Widget build(BuildContext context) {
-    //var selectedDay = context.watch<CalendarState>().selectedDay;
     String date = context.watch<CalendarState>().getStringDate();
     List<Task> tasksEntry = context.watch<TaskState>().getTaskByDate(date);
-
-    for (Task task in tasksEntry){
-      task.setTitle('s');
-    }
 
     return  Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
