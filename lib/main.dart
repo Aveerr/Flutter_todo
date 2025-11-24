@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'features/DialogWindow/domain/dialog_window_state.dart';
 import 'features/modalBottomSheet/domain/modal_bottom_state.dart';
@@ -13,8 +15,9 @@ Future<void> main() async {
     print('Приложение запущенно');
   }
 
-  runApp(
+  await Hive.initFlutter();
 
+  runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => CalendarState()),

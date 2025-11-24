@@ -17,6 +17,8 @@ Future<dynamic> showDialogWindow(BuildContext context, String title, Task widget
   final TextEditingController controller = TextEditingController();
   final dialogState = context.read<DialogWindowState>();
   dialogState.setTask(widget);
+  dialogState.setTaskEndTime(widget.taskEndTime!);
+  dialogState.setTaskStartTime(widget.taskStartTime!);
   controller.text = widget.title;
 
   return showDialog(
